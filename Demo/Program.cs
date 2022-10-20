@@ -1,3 +1,6 @@
+using Demo.Data;
+using Microsoft.EntityFrameworkCore;
+
 namespace Demo
 {
     public class Program
@@ -11,6 +14,9 @@ namespace Demo
             builder.Services.AddControllers();            
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddDbContext<IssueDBContext>(
+                o => o.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer"))
+                ); 
 
             var app = builder.Build();
 
